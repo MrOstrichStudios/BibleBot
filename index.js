@@ -17,28 +17,13 @@ app.command("/biblebot-ping", async ({ command, ack, respond }) => {
   await respond({text: `Hey Dude! the bot is alive thou ^_^`})
 });
 
-app.command("/biblebot-verse", async ({ack, respond, command}) => {
-  await ack();
-
-  try {
-    const response = await axios.get(`https://bible-api.com/data/web/random`);
-    const data = response.data;
-    const verseBook = data.random_verse.book;
-    const verseChapter = data.random_verse.chapter;
-    const verseNumber = data.random_verse.verse;
-    const verseText = data.random_verse.text.trim();
-    await respond({text:`**Bible Verse for ya twin!:**\n${verseBook} ${verseChapter}:${verseNumber} - ${verseText}`})
-  } catch (err) {
-    console.error(err);
-    await respond({ text: "**Sorry twin; getting some issues here.**"});
-  }
-});
-
 app.command("/biblebot-verse", async ({ ack, respond, command }) => {
   await ack();
   const arg = command.text.trim().toLowerCase();
+
   try {
     let response, verseData;
+
     if (arg === "old") {
       // Old Testament random verse
       response = await axios.get("https://bible-api.com/data/web/random/OT");
@@ -47,11 +32,16 @@ app.command("/biblebot-verse", async ({ ack, respond, command }) => {
       // New Testament random verse
       response = await axios.get("https://bible-api.com/data/web/random/NT");
       verseData = response.data.random_verse;
-    } else {
+    } else if (arg === "random" || arg === "") {
       // Default random verse (whole Bible)
       response = await axios.get("https://bible-api.com/data/web/random");
       verseData = response.data.random_verse;
+    } else {
+      // Invalid parameter
+      await respond({ text: "*sry twin but invalid parameter ya chose*" });
+      return;
     }
+
     await respond({
       text: `*Bible Verse for ya twin!:*\n${verseData.book} ${verseData.chapter}:${verseData.verse} - ${verseData.text.trim()}`
     });
