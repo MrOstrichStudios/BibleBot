@@ -5,7 +5,9 @@ You can test it at Hack Club - Slack : https://app.slack.com/client/E09V59WQY1E/
 ---
 
 ## Features
-- **[Random verse](ca://s?q=BibleBot_random_verse_feature)** → `/biblebot-verse random` or just `/biblebot-verse`
+- **[Ping command](ca://s?q=BibleBot_ping_command)** → `/biblebot-ping` responds with a simple message to confirm the bot is alive
+- **[Help command](ca://s?q=BibleBot_help_command)** → `/biblebot-help` lists available commands and usage hints
+- **[Random verse](ca://s?q=BibleBot_random_verse_feature)** → `/biblebot-verse random`
 - **[Old Testament verse](ca://s?q=BibleBot_old_testament_feature)** → `/biblebot-verse old`
 - **[New Testament verse](ca://s?q=BibleBot_new_testament_feature)** → `/biblebot-verse new`
 - **Error handling** → Invalid parameters return a friendly error message
